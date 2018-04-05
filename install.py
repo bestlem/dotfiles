@@ -90,7 +90,7 @@ def home_dotfiles(user_root):
 				else:
 					dirs_to_pass_down.append(dir)
 					# modify directories to recurse into
-		dirnames[:] = dirs_to_pass_down
+			dirnames[:] = dirs_to_pass_down
 
 		if len(paths_to_link) > 0:
 			msg_level(1, "Installing from {} to {}".format(root, target_sub_dir))
