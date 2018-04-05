@@ -1,0 +1,4 @@
+#!/bin/sh
+#backup from overflow disk to NAS
+
+rsync -vr /Volumes/Overflow/mark/itunes\ media iomega_nfs1.local::Music

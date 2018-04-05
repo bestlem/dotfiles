@@ -1,0 +1,6 @@
+bin/test
+
+# add some globals as git might not be setup fully
+*~
+.DS_Store*
+.venv
