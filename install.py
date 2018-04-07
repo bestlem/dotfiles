@@ -5,14 +5,14 @@ Readonly config files + simple scripts
 """
 import subprocess
 import os
-from os.path import join, expanduser, dirname, relpath
-from pathlib import Path, PurePath
+from os.path import dirname, expanduser
+from pathlib import Path
 import argparse
 import shutil
 
 
 def msg_level(level, message):
-	""" Output a message to stdout if level >= number of v in -vvv verbode option """
+	""" Output a message to stdout if level >= number of v in -vvv verbose option """
 	if args.verbose and args.verbose >= level:
 		pad = '  ' * level
 		print(pad + message)
@@ -37,7 +37,7 @@ def link_list_paths(sources, target_dir):
 
 
 def delete_path(target_file):
-	if target_file.is_dir():
+	if not target_file.is_symlink() and target_file.is_dir():
 		shutil.rmtree(target_file)
 	else:
 		target_file.unlink()
@@ -46,30 +46,32 @@ def delete_path(target_file):
 def link_path(source, target_dir):
 	""" link one thing """
 	target_name = source.stem if source.suffix == '.symlink' else source.name
-	target_file = target_dir / target_name
-	need_to_update = True
+	target = target_dir / target_name
+
+	if need_to_update(source, target):
+		if not target_dir.exists():
+			msg_level(2, "Make dir {}".format(target_dir))
+			if args.do_it:
+				target_dir.mkdir(parents=True)
+		msg_level(2, "Linking from {} to file {}".format(source, target))
+		if args.do_it:
+			target.symlink_to(source)
+
+
+def need_to_update(source, target_file):
+	"""Check to see if target needs to be replaced or does not exist"""
+	need = True
 	if target_file.is_symlink() or target_file.exists():
 		if target_file.samefile(source):
 			msg_level(2, "Matched {} and {} as same file".format(source, target_file))
-			need_to_update = False
+			need = False
 		else:
 			msg_level(2, "Deleting existing file {}".format(target_file))
 			if args.do_it:
 				delete_path(target_file)
 	else:
 		msg_level(3, "File {} does not exist".format(target_file))
-
-	if need_to_update:
-		if not target_dir.exists():
-			msg_level(2, "Make dir {}".format(target_dir))
-			if args.do_it:
-				target_dir.mkdir(parents=True)
-		msg_level(2, "Linking from {} to file {}".format(source, target_file))
-		if args.do_it:
-			target_file.symlink_to(source)
-
-
-
+	return need
 
 
 def home_dotfiles(user_root):
@@ -81,14 +83,14 @@ def home_dotfiles(user_root):
 		paths_to_link = []
 		if len(files) > 0:
 			paths_to_link += files
-		#Only link ppath if ends in symlink
+		# Only link path if ends in symlink
 		if len(dirnames) > 0:
 			dirs_to_pass_down = []
-			for dir in dirnames:
-				if dir.endswith('.symlink'):
-					paths_to_link.append(root_path / dir)
+			for d in dirnames:
+				if d.endswith('.symlink'):
+					paths_to_link.append(root_path / d)
 				else:
-					dirs_to_pass_down.append(dir)
+					dirs_to_pass_down.append(d)
 					# modify directories to recurse into
 			dirnames[:] = dirs_to_pass_down
 
@@ -135,7 +137,7 @@ def get_args():
 
 	_args = parser.parse_args()
 	if _args.user_root:
-		_args.target_dir = expanduser('~')
+		_args.target_dir = Path.home()
 	return _args
 
 
