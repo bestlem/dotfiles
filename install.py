@@ -83,8 +83,8 @@ def home_dotfiles(user_root):
 			paths_to_link += files
 		#Only link ppath if ends in symlink
 		if len(dirnames) > 0:
+			dirs_to_pass_down = []
 			for dir in dirnames:
-				dirs_to_pass_down = []
 				if dir.endswith('.symlink'):
 					paths_to_link.append(root_path / dir)
 				else:
