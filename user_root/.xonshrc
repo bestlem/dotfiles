@@ -1,28 +1,58 @@
 
 # hack to get working so can build dotfiles installer
-import pathlib
+from pathlib import Path
 
-xontrib load coreutils prompt_ret_code z powerline  whole_word_jumping
-# The following seem to require xpip to be run - which needs a sudo
-#xontrib load vox vox_tabcomplete avox docker_tabcomplete
+def path_setup():
+	new_paths = [ '~/bin', '~/miniconda3/bin', '/usr/local/bin', '/opt/local/bin' ]
+	new_paths.reverse()
+	for p in new_paths:
+		if Path(p).expanduser().exists():
+			$PATH.insert(0, p)
 
-new_paths = [ '~/bin', '/opt/local/bin' ]
-new_paths.reverse()
-for x in new_paths:
-	$PATH.insert(0, x)
+def load_xontribs():
+	xontrib load xonda
+	xontrib load coreutils prompt_ret_code z powerline
+	#whole_word_jumping
+	# The following seem to require$PROJECT_DIRS
+	#xontrib load vox vox_tabcomplete avox
+	#docker_tabcomplete
 
-$LSCOLORS='gxfxbEaEBxxEhEhBaDaCaD'
-$XONSH_COLOR_STYLE='fruity'
+def macos_setup():
+	# macos specific
+	$LSCOLORS='gxfxbEaEBxxEhEhBaDaCaD'
+	$XONSH_COLOR_STYLE='fruity'
 
-aliases['ll'] = 'ls -AGFlha'
-aliases['lr'] = 'ls -AGFlhart'
-aliases['l@'] = 'ls -AG@Flha'
-aliases['l'] = 'ls -AG@Fha'
-aliases['e'] = 'open -a Aquamacs.app'
-aliases['man'] = 'openman'
+	aliases['ll'] = 'ls -AGFlha'
+	aliases['l@'] = 'ls -AG@Flha'
+	aliases['lr'] = 'ls -AGFlhart'
+	aliases['l'] = 'ls -AG@Fha'
+	aliases['e'] = 'open -a Aquamacs.app'
+	aliases['man'] = 'openman'
+
+	# OS independant (well at least Unixy for now)
+	aliases['mkdir'] = 'mkdir -p'
 
 
-def _env(args, stdin=None):
+# Alias Helper funcs
+def __env(args, stdin=None):
 	/usr/bin/env | sort
 
-aliases['env'] = _env
+def _mkcd(args, stdin=None):
+    if len(args) == 1:
+        mkdir -p @(args[0])
+        cd @(args[0])
+    else:
+        return
+
+def typo_aliases():
+	aliases['ks'] = aliases['ls']
+
+path_setup()
+load_xontribs()
+macos_setup()
+typo_aliases()
+aliases['env'] = __env
+aliases['mkcd'] = _mkcd
+
+
+# cleanup remove things from namespace

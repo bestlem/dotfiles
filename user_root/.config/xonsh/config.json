@@ -1,7 +1,6 @@
 {
 	"env": {
   "AUTO_PUSHD": true,
-  "CDPATH": "[\"['~/src']\"]",
   "COMPLETIONS_CONFIRM": true,
   "COMPLETIONS_MENU_ROWS": 10
  }
