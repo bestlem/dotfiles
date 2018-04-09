@@ -1,7 +1,11 @@
 
-# hack to get working so can build dotfiles installer
+import sys
 from pathlib import Path
+from xonsh.platform import (
+    ON_WINDOWS, ON_LINUX, ON_DARWIN
+)
 
+sys.path.append(${...}['XONSH_CONFIG_DIR'] + '/xonsh_config')
 def path_setup():
 	new_paths = [ '~/bin', '~/miniconda3/bin', '/usr/local/bin', '/opt/local/bin' ]
 	new_paths.reverse()
@@ -17,21 +21,42 @@ def load_xontribs():
 	#xontrib load vox vox_tabcomplete avox
 	#docker_tabcomplete
 
+def appearence():
+	$LSCOLORS='gxfxbEaEBxxEhEhBaDaCaD'
+	#$XONSH_COLOR_STYLE='fruity'
+	$XONSH_COLOR_STYLE='paraiso-dark'
+	# radable also 'native' 
+	#ptk display stuff
+	$COMPLETIONS_BRACKETS = False
+	$COMPLETIONS_CONFIRM = True
+	
+def behaviour():
+	# from https://github.com/mitnk/dotfiles/blob/master/xonsh/xonshrc
+	# history backend: 'json', 'sqlite', 'dummy', <class>
+	$XONSH_HISTORY_BACKEND = 'sqlite'
+
+	# bigger history
+	$XONSH_HISTORY_SIZE = (0xFFFFFF, 'commands')
+	# do NOT save output in history
+	$XONSH_STORE_STDOUT = False
+	# history - ignore duplicated cmds
+	$HISTCONTROL = 'ignoredups'
+
+	$XONSH_SHOW_TRACEBACK = True
+
+	
 def macos_setup():
 	# macos specific
-	$LSCOLORS='gxfxbEaEBxxEhEhBaDaCaD'
-	$XONSH_COLOR_STYLE='fruity'
-
-	aliases['ll'] = 'ls -AGFlha'
 	aliases['l@'] = 'ls -AG@Flha'
-	aliases['lr'] = 'ls -AGFlhart'
 	aliases['l'] = 'ls -AG@Fha'
 	aliases['e'] = 'open -a Aquamacs.app'
+	aliases
 	aliases['man'] = 'openman'
 
-	# OS independant (well at least Unixy for now)
-	aliases['mkdir'] = 'mkdir -p'
-
+	# From macports
+	for p in ['/opt/local/share/bash-completion/completions']:
+		if Path(p).exists:
+			$BASH_COMPLETIONS.insert(0, p)
 
 # Alias Helper funcs
 def __env(args, stdin=None):
@@ -44,15 +69,26 @@ def _mkcd(args, stdin=None):
     else:
         return
 
+
+def posix_setup():
+	aliases['lr'] = 'ls -AGFlhart'
+	aliases['ll'] = 'ls -AGFlha'
+
+	aliases['grep'] = 'grep -i --color=always'
+	aliases['mkdir'] = 'mkdir -p'
+	aliases['env'] = __env
+	aliases['mkcd'] = _mkcd
+
 def typo_aliases():
 	aliases['ks'] = aliases['ls']
 
 path_setup()
 load_xontribs()
-macos_setup()
+appearence()
+behaviour()
+posix_setup()
+if  ON_DARWIN: macos_setup()
 typo_aliases()
-aliases['env'] = __env
-aliases['mkcd'] = _mkcd
 
 
 # cleanup remove things from namespace
