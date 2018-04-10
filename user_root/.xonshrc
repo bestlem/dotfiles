@@ -19,13 +19,13 @@ def load_xontribs():
 	#whole_word_jumping
 	# The following seem to require$PROJECT_DIRS
 	#xontrib load vox vox_tabcomplete avox
-	#docker_tabcomplete
+	xontrib docker_tabcomplete
 
 def appearence():
 	$LSCOLORS='gxfxbEaEBxxEhEhBaDaCaD'
-	#$XONSH_COLOR_STYLE='fruity'
+	#$XONSH_COLOR_STYLE='fruity' #makes virtenv in powerline unreadable
 	$XONSH_COLOR_STYLE='paraiso-dark'
-	# radable also 'native' 
+
 	#ptk display stuff
 	$COMPLETIONS_BRACKETS = False
 	$COMPLETIONS_CONFIRM = True
