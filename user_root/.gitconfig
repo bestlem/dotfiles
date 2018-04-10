@@ -3,7 +3,7 @@
 	
 [core]
 	ignorecase = true  
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/mark/.gitignore_global
 
 	pager = less -FRSX
 	whitespace=fix,indent-with-non-tab,trailing-space,cr-at-eol
@@ -16,8 +16,13 @@
 [merge]
 	tool = opendiff
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	cmd = /Applications/Aquamacs.app/Contents/MacOS/bin/emacsclient --eval \"(ediff-files \\\"$LOCAL\\\" \\\"$REMOTE\\\")\"
 	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[user]
+	name = Mark Bestley
+	email = 37385+bestlem@users.noreply.github.com
+[commit]
+	template = /Users/mark/.stCommitMsg
