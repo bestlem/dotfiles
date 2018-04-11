@@ -62,7 +62,7 @@ def need_to_update(source, target_file):
 	"""Check to see if target needs to be replaced or does not exist"""
 	need = True
 	if target_file.is_symlink() or target_file.exists():
-		if target_file.samefile(source):
+		if target_file.exists() and target_file.samefile(source):
 			msg_level(2, "Matched {} and {} as same file".format(source, target_file))
 			need = False
 		else:
