@@ -5,3 +5,5 @@ bin/test
 .DS_Store*
 .venv
 workspace.xml
+fish_history
+fishd.10ddb1b018a7
