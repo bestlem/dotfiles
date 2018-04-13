@@ -17,4 +17,9 @@ Install from conda site or as part of distribution
 and some combination of
 
     omf install
-    
+ 
+## macports
+Need to edit `/opt/local/etc/macports/variants.conf`
+
+    -x11 +no_x11 +quartz
+    +bash_completion
