@@ -5,19 +5,34 @@ from xonsh.platform import (
     ON_WINDOWS, ON_LINUX, ON_DARWIN
 )
 
-sys.path.append(${...}['XONSH_CONFIG_DIR'] + '/xonsh_config')
-def path_setup():
-	new_paths = [ '~/bin', '~/miniconda3/bin', '/usr/local/bin', '/opt/local/bin' ]
+#sys.path.append(${...}['XONSH_CONFIG_DIR'] + '/xonsh_config')
+
+def __path_expand(path, new_paths):
 	new_paths.reverse()
 	for p in new_paths:
 		if Path(p).expanduser().exists():
-			$PATH.insert(0, p)
+			path.insert(0, p)
+
+
+def path_setup():
+	__path_expand(
+		$PATH,
+		[ '~/bin', '~/miniconda3/bin', '/usr/local/bin', '/opt/local/bin' ]
+		)
+	#path_expand(
+		#$BASH_COMPLETIONS,#
+		#[
+		#	'/opt/local/share/bash-completion/completions',
+		#	'/opt/local/etc/bash_completion.d',
+		#	'~/.config/bash_completions'
+		#])
+
 
 def load_xontribs():
 	xontrib load xonda
 	xontrib load coreutils prompt_ret_code z powerline
 	#whole_word_jumping
-	# The following seem to require$PROJECT_DIRS
+	# The following seem to require $PROJECT_DIRS
 	#xontrib load vox vox_tabcomplete avox
 	xontrib docker_tabcomplete
 
@@ -50,13 +65,13 @@ def macos_setup():
 	aliases['l@'] = 'ls -AG@Flha'
 	aliases['l'] = 'ls -AG@Fha'
 	aliases['e'] = 'open -a Aquamacs.app'
-	aliases
 	aliases['man'] = 'openman'
 
-	# From macports
-	for p in ['/opt/local/share/bash-completion/completions']:
-		if Path(p).exists:
-			$BASH_COMPLETIONS.insert(0, p)
+	# Macports based
+	path_expand(
+		$BASH_COMPLETIONS, ['/opt/local/etc/profile.d/bash_completion.sh']
+		)
+
 
 # Alias Helper funcs
 def __env(args, stdin=None):
@@ -87,7 +102,7 @@ load_xontribs()
 appearence()
 behaviour()
 posix_setup()
-if  ON_DARWIN: macos_setup()
+if ON_DARWIN: macos_setup()
 typo_aliases()
 
 
