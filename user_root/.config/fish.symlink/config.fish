@@ -1,6 +1,8 @@
 
+set conda_path  ~/miniconda3
+
 if status --is-login
-	set PATH ~/bin /usr/local/bin /opt/local/bin /usr/bin /bin /usr/sbin /sbin  /Applications/VMware\ Fusion.app/Contents/Public
+	set PATH $conda_path/bin ~/bin  /usr/local/bin /opt/local/bin /usr/bin /bin /usr/sbin /sbin
 end
 if status --is-interactive
 	set EDITOR "open -a Aquamacs.app "
@@ -8,7 +10,6 @@ if status --is-interactive
 	set -Ux LSCOLORS gxfxbEaEBxxEhEhBaDaCaD
 	set BROWSER open
 	set WAFDIR /Users/mark/src/cpp/waf/waflib
-	#source ~/.config/fish/conda.fish
 	
 	switch $TERM_PROGRAM
 		case iTerm.app
@@ -16,6 +17,9 @@ if status --is-interactive
 	end
 end
 
+if test -e $conda_path/etc/fish/conf.d/conda.fish
+	source  $conda_path/etc/fish/conf.d/conda.fish
+end
 
 
 
