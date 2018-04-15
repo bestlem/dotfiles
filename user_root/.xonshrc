@@ -68,7 +68,7 @@ def macos_setup():
 	aliases['man'] = 'openman'
 
 	# Macports based
-	path_expand(
+	__path_expand(
 		$BASH_COMPLETIONS, ['/opt/local/etc/profile.d/bash_completion.sh']
 		)
 
