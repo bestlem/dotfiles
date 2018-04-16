@@ -1,3 +1,4 @@
+$XONSH_SHOW_TRACEBACK = True
 
 import sys
 from pathlib import Path
@@ -5,19 +6,29 @@ from xonsh.platform import (
     ON_WINDOWS, ON_LINUX, ON_DARWIN
 )
 
+orig_PATH = $PATH[:]
+
 #sys.path.append(${...}['XONSH_CONFIG_DIR'] + '/xonsh_config')
+cd $XONSH_CONFIG_DIR
+source 't.xsh'
+
+cd -
 
 def __path_expand(path, new_paths):
 	new_paths.reverse()
 	for p in new_paths:
-		if Path(p).expanduser().exists():
+		p1 = Path(p).expanduser()
+		if p1.as_posix() in path:
+			path.remove(p1.as_posix())
+		if p1.exists():
 			path.insert(0, p)
 
 
 def path_setup():
+	python_path = Path(sys.executable).parent
 	__path_expand(
 		$PATH,
-		[ '~/bin', '~/miniconda3/bin', '/usr/local/bin', '/opt/local/bin' ]
+		[python_path, '~/bin', '/usr/local/bin', '/opt/local/bin' ]
 		)
 	#path_expand(
 		#$BASH_COMPLETIONS,#
@@ -33,8 +44,10 @@ def load_xontribs():
 	xontrib load coreutils prompt_ret_code z powerline
 	#whole_word_jumping
 	# The following seem to require $PROJECT_DIRS
-	#xontrib load vox vox_tabcomplete avox
+	xontrib load vox vox_tabcomplete avox
 	xontrib docker_tabcomplete
+	pass
+
 
 def appearence():
 	$LSCOLORS='gxfxbEaEBxxEhEhBaDaCaD'
@@ -44,6 +57,7 @@ def appearence():
 	#ptk display stuff
 	$COMPLETIONS_BRACKETS = False
 	$COMPLETIONS_CONFIRM = True
+
 	
 def behaviour():
 	# from https://github.com/mitnk/dotfiles/blob/master/xonsh/xonshrc
@@ -56,8 +70,6 @@ def behaviour():
 	$XONSH_STORE_STDOUT = False
 	# history - ignore duplicated cmds
 	$HISTCONTROL = 'ignoredups'
-
-	$XONSH_SHOW_TRACEBACK = True
 
 	
 def macos_setup():
