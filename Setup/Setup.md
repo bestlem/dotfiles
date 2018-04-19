@@ -1,12 +1,12 @@
 # Setup
 
 ## Conda
-Install from conda site or as part of distribution
+Install from conda site using script file or as part of distribution
  
      conda update
-     conda config --add channels conda-forge
-     conda install xonsh
-     conda install xonda -c conda-forge
+     # Add conda-forge after others
+     conda config --append channels conda-forge
+     
      
 ## Oh My Fish - if using
   Note this is not in all branches
@@ -23,3 +23,5 @@ Need to edit `/opt/local/etc/macports/variants.conf`
 
     -x11 +no_x11 +quartz
     +bash_completion
+    
+
