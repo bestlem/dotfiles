@@ -40,12 +40,12 @@ def path_setup():
 
 
 def load_xontribs():
-	xontrib load xonda
+	#xontrib load xonda
 	xontrib load coreutils prompt_ret_code z powerline
 	#whole_word_jumping
 	# The following seem to require $PROJECT_DIRS
-	xontrib load vox vox_tabcomplete avox
-	xontrib docker_tabcomplete
+	#xontrib load vox vox_tabcomplete avox
+	#xontrib docker_tabcomplete
 	pass
 
 
@@ -81,7 +81,10 @@ def macos_setup():
 
 	# Macports based
 	__path_expand(
-		$BASH_COMPLETIONS, ['/opt/local/etc/profile.d/bash_completion.sh']
+		$BASH_COMPLETIONS, [
+			'/opt/local/share/bash-completion/bash_completion',
+			'/opt/local/etc/profile.d/bash_completion.sh',
+            ]
 		)
 
 
