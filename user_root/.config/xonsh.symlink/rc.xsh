@@ -8,13 +8,16 @@ from xonsh.platform import (
 
 orig_PATH = $PATH[:]
 
+#xontrib load xonda
+
 #sys.path.append(${...}['XONSH_CONFIG_DIR'] + '/xonsh_config')
 cd $XONSH_CONFIG_DIR
-source 't.xsh'
+source 'conda.xsh'
+conda activate xonsh
 
 cd -
 
-def __path_expand(path, new_paths):
+def __path_prepend(path, new_paths):
 	new_paths.reverse()
 	for p in new_paths:
 		p1 = Path(p).expanduser()
@@ -26,7 +29,7 @@ def __path_expand(path, new_paths):
 
 def path_setup():
 	python_path = Path(sys.executable).parent
-	__path_expand(
+	__path_prepend(
 		$PATH,
 		[python_path, '~/bin', '/usr/local/bin', '/opt/local/bin' ]
 		)
@@ -80,7 +83,7 @@ def macos_setup():
 	aliases['man'] = 'openman'
 
 	# Macports based
-	__path_expand(
+	__path_prepend(
 		$BASH_COMPLETIONS, [
 			'/opt/local/share/bash-completion/bash_completion',
 			'/opt/local/etc/profile.d/bash_completion.sh',
@@ -122,3 +125,5 @@ typo_aliases()
 
 
 # cleanup remove things from namespace
+
+#source '~/miniconda3/lib/python3.6/site-packages/xonsh/conda.xsh'
