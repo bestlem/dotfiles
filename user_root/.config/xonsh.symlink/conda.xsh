@@ -47,12 +47,14 @@ def _conda_deactivate_handler():
 
 
 def _conda_passthrough_handler(args):
-    pipeline = ![@(_CONDA_EXE) @(' '.join(args))]
+    print(args)
+    #print(@(_CONDA_EXE) @(args))
+    pipeline = ![@(_CONDA_EXE) @(args)]
     _raise_pipeline_error(pipeline)
 
 
 def _conda_reactivate_handler(args, name_or_prefix_given):
-    pipeline = ![@(_CONDA_EXE) @(' '.join(args))]
+    pipeline = ![@(_CONDA_EXE) @(args)]
     _raise_pipeline_error(pipeline)
 
     if not name_or_prefix_given:
