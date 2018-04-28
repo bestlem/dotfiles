@@ -44,7 +44,7 @@ def path_setup():
 
 def load_xontribs():
 	#xontrib load xonda
-	xontrib load coreutils prompt_ret_code z powerline
+	xontrib load coreutils prompt_ret_code z 
 	#whole_word_jumping
 	# The following seem to require $PROJECT_DIRS
 	#xontrib load vox vox_tabcomplete avox
@@ -60,6 +60,9 @@ def appearence():
 	#ptk display stuff
 	$COMPLETIONS_BRACKETS = False
 	$COMPLETIONS_CONFIRM = True
+	#$PROMPT = '{env_name:{} }{BOLD_GREEN} {short_cwd} {branch_color}{curr_branch: {}}{NO_COLOR} {ret_code_color}{ret_code}{prompt_end}{NO_COLOR} '
+	xontrib load powerline
+	$TITLE = '{env_name:{} }{curr_branch: {}} {user}@{hostname}: {cwd} | xonsh'
 
 	
 def behaviour():
