@@ -24,4 +24,11 @@ Need to edit `/opt/local/etc/macports/variants.conf`
     -x11 +no_x11 +quartz
     +bash_completion
     
+## jupyter
+In a conda env
+
+    conda install juypter
+    conda install nb_conda_kernels
+    conda install conda
+    
 
