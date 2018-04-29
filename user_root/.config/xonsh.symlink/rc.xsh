@@ -62,7 +62,7 @@ def appearence():
 	$COMPLETIONS_CONFIRM = True
 	#$PROMPT = '{env_name:{} }{BOLD_GREEN} {short_cwd} {branch_color}{curr_branch: {}}{NO_COLOR} {ret_code_color}{ret_code}{prompt_end}{NO_COLOR} '
 	xontrib load powerline
-	$TITLE = '{env_name:{} }{curr_branch: {}} {user}@{hostname}: {cwd} | xonsh'
+	$TITLE = '{env_name:🐍{} }{curr_branch:🌴({})} {user}@{hostname}: {cwd} | xonsh'
 
 	
 def behaviour():
