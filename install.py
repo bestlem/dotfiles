@@ -6,6 +6,7 @@ Readonly config files + simple scripts
 import subprocess
 import os
 from os.path import dirname, expanduser
+import sys
 from pathlib import Path
 import argparse
 import shutil
@@ -147,4 +148,6 @@ if __name__ == '__main__':
 		home_dotfiles('test_root')
 	else:
 		home_dotfiles('user_root')
+		if sys.platform == 'Darwin':
+			home_dotfiles('mac_user_root')
 		user_bin()
