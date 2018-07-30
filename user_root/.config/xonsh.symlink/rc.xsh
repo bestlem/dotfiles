@@ -48,7 +48,7 @@ def load_xontribs():
 	#whole_word_jumping
 	# The following seem to require $PROJECT_DIRS
 	#xontrib load vox vox_tabcomplete avox
-	#xontrib docker_tabcomplete
+	xontrib docker_tabcomplete
 	pass
 
 

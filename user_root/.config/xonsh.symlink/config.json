@@ -1,8 +1,0 @@
-{
-	"env": {
-		"AUTO_PUSHD": true,
-		"COMPLETIONS_CONFIRM": true,
-		"COMPLETIONS_MENU_ROWS": 10,
-		"XONSH_SHOW_TRACEBACK": true
- }
-}
