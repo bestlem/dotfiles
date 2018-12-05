@@ -48,7 +48,7 @@ def load_xontribs():
 	#whole_word_jumping
 	# The following seem to require $PROJECT_DIRS
 	#xontrib load vox vox_tabcomplete avox
-	xontrib docker_tabcomplete
+	#xontrib docker_tabcomplete # error i as xontrib has a depreciated thing
 	pass
 
 
@@ -61,7 +61,7 @@ def appearence():
 	$COMPLETIONS_BRACKETS = False
 	$COMPLETIONS_CONFIRM = True
 	#$PROMPT = '{env_name:{} }{BOLD_GREEN} {short_cwd} {branch_color}{curr_branch: {}}{NO_COLOR} {ret_code_color}{ret_code}{prompt_end}{NO_COLOR} '
-	xontrib load powerline
+	#xontrib load powerline
 	$TITLE = '{env_name:🐍{} }{curr_branch:🌴({})} {user}@{hostname}: {cwd} | xonsh'
 
 	
@@ -88,7 +88,7 @@ def macos_setup():
 	# Macports based
 	__path_prepend(
 		$BASH_COMPLETIONS, [
-			'/opt/local/share/bash-completion/bash_completion',
+			'/opt/local/share/bash-completion/bash_completisenvon',
 			'/opt/local/etc/profile.d/bash_completion.sh',
             ]
 		)
