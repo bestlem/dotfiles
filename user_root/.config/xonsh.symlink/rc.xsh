@@ -1,5 +1,16 @@
 $XONSH_SHOW_TRACEBACK = True
 
+
+''' Hode  Depreciation warnings down in code
+From https://stackoverflow.com/a/1640777/151019
+'''
+
+import warnings
+
+with warnings.catch_warnings():
+    warnings.filterwarnings("ignore",category=DeprecationWarning)
+    import imp
+	
 import sys
 from pathlib import Path
 from xonsh.platform import (
@@ -8,14 +19,9 @@ from xonsh.platform import (
 
 orig_PATH = $PATH[:]
 
-#xontrib load xonda
+orig_sys_path = sys.path
 
-#sys.path.append(${...}['XONSH_CONFIG_DIR'] + '/xonsh_config')
-cd $XONSH_CONFIG_DIR
-source 'conda.xsh'
-conda activate xonsh
-
-cd -
+sys.path.insert(0, '/Users/mark/src/python/xontrib-powerline')
 
 def __path_prepend(path, new_paths):
 	new_paths.reverse()
@@ -29,25 +35,17 @@ def __path_prepend(path, new_paths):
 
 def path_setup():
 	python_path = Path(sys.executable).parent
+	python_path = '~/miniconda3/bin'
 	__path_prepend(
 		$PATH,
 		[python_path, '~/bin', '/usr/local/bin', '/opt/local/bin' ]
 		)
-	#path_expand(
-		#$BASH_COMPLETIONS,#
-		#[
-		#	'/opt/local/share/bash-completion/completions',
-		#	'/opt/local/etc/bash_completion.d',
-		#	'~/.config/bash_completions'
-		#])
 
 
 def load_xontribs():
-	#xontrib load xonda
-	xontrib load coreutils prompt_ret_code z 
+	xontrib load xonda
+	xontrib load coreutils prompt_ret_code  
 	#whole_word_jumping
-	# The following seem to require $PROJECT_DIRS
-	#xontrib load vox vox_tabcomplete avox
 	#xontrib docker_tabcomplete # error i as xontrib has a depreciated thing
 	pass
 
@@ -60,8 +58,7 @@ def appearence():
 	#ptk display stuff
 	$COMPLETIONS_BRACKETS = False
 	$COMPLETIONS_CONFIRM = True
-	#$PROMPT = '{env_name:{} }{BOLD_GREEN} {short_cwd} {branch_color}{curr_branch: {}}{NO_COLOR} {ret_code_color}{ret_code}{prompt_end}{NO_COLOR} '
-	#xontrib load powerline
+	xontrib load powerline
 	$TITLE = '{env_name:🐍{} }{curr_branch:🌴({})} {user}@{hostname}: {cwd} | xonsh'
 
 	
