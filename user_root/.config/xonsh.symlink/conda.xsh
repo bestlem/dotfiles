@@ -6,7 +6,7 @@ import sys
 if '_CONDA_EXE' not in locals():
     _CONDA_EXE = "python -m conda"  # development mode
 
-_REACTIVATE_COMMANDS = ('install', 'update', 'remove', 'uninstall')
+_REACTIVATE_COMMANDS = ('install', 'update', 'upgrade', 'remove', 'uninstall')
 
 
 def _parse_args(args=None):
@@ -79,5 +79,7 @@ def _conda_main(args=None):
 
 if 'CONDA_SHLVL' not in ${...}:
     $CONDA_SHLVL = '0'
+	import os, sys
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname($CONDA_EXE)), "condabin"))
 
 aliases['conda'] = _conda_main
