@@ -26,3 +26,8 @@
 	email = 37385+bestlem@users.noreply.github.com
 [commit]
 	template = /Users/mark/.stCommitMsg
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
