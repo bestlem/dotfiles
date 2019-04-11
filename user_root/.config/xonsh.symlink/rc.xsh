@@ -38,7 +38,7 @@ def path_setup():
 	python_path = '~/miniconda3/bin'
 	__path_prepend(
 		$PATH,
-		[python_path, '~/bin', '/usr/local/bin', '/opt/local/bin' ]
+		[python_path, '~/.local/bin', '~/bin', '/usr/local/bin', '/opt/local/bin' ]
 		)
 
 
