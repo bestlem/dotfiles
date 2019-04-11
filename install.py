@@ -148,6 +148,6 @@ if __name__ == '__main__':
 		home_dotfiles('test_root')
 	else:
 		home_dotfiles('user_root')
-		if sys.platform == 'Darwin':
+		if sys.platform == 'darwin':
 			home_dotfiles('mac_user_root')
 		user_bin()
