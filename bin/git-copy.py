@@ -25,7 +25,7 @@ def list_git_root( source_dir ):
 		for x in ['.Trash', 'tmp', 'ThirdParty',
                       'Caches', 'Google Drive', 'Object Arts',
                       '.cocoapods', 'Dropbox', '.build', "Wineskin", "SyncServices",
-                      ".cache", ".local"]: 
+                      ".cache", ".local",".cookiecutters", "Aquamacs Emacs/Packages" ]:
 			if x in dirs:
 				dirs.remove(x)
 

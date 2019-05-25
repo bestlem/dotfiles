@@ -81,7 +81,8 @@ def macos_setup():
 	aliases['l'] = 'ls -AG@Fha'
 	aliases['e'] = 'open -a Aquamacs.app'
 	aliases['man'] = 'openman'
-
+	aliases['killaqua'] = 'killall -USR2 Aquamacs'
+	
 	# Macports based
 	__path_prepend(
 		$BASH_COMPLETIONS, [
