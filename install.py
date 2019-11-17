@@ -104,7 +104,9 @@ def home_dotfiles(user_root):
 def user_bin():
 	""" executable files to be installed in ~/bin"""
 	bin_files_dir = os.path.abspath(os.path.join(args.source_dir, 'bin'))
-	files = [os.path.join(bin_files_dir, x) for x in os.listdir(bin_files_dir)]
+	files = [os.path.join(bin_files_dir, x)
+                 for x in os.listdir(bin_files_dir)
+                 if not os.path.isdir(x)]
 	install_dir = os.path.join(args.target_dir, 'bin')
 	msg_level(1, "Installing from {} to {}".format(bin_files_dir, install_dir))
 	if args.do_it:
