@@ -156,10 +156,14 @@
                 }
             ],
             "name": "Default profile",
+            "parameters": {
+                "delay_milliseconds_before_open_device": 1000
+            },
             "selected": false,
             "simple_modifications": [],
             "virtual_hid_keyboard": {
-                "country_code": 0
+                "country_code": 0,
+                "mouse_key_xy_scale": 100
             }
         },
         {
@@ -270,6 +274,14 @@
                         },
                         {
                             "from": {
+                                "key_code": "print_screen"
+                            },
+                            "to": {
+                                "key_code": "f13"
+                            }
+                        },
+                        {
+                            "from": {
                                 "key_code": "right_command"
                             },
                             "to": {
@@ -291,14 +303,6 @@
                             "to": {
                                 "key_code": "f14"
                             }
-                        },
-                        {
-                            "from": {
-                                "key_code": "print_screen"
-                            },
-                            "to": {
-                                "key_code": "f13"
-                            }
                         }
                     ]
                 },
@@ -311,7 +315,7 @@
                         "product_id": 16495,
                         "vendor_id": 1133
                     },
-                    "ignore": true,
+                    "ignore": false,
                     "manipulate_caps_lock_led": false,
                     "simple_modifications": []
                 },
@@ -453,10 +457,14 @@
                 }
             ],
             "name": "Corsair British based on Mac australian",
+            "parameters": {
+                "delay_milliseconds_before_open_device": 1000
+            },
             "selected": true,
             "simple_modifications": [],
             "virtual_hid_keyboard": {
-                "country_code": 0
+                "country_code": 0,
+                "mouse_key_xy_scale": 100
             }
         }
     ]
