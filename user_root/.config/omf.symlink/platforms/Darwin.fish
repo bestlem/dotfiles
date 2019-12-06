@@ -11,5 +11,5 @@ if status --is-interactive
 	set BROWSER open
 	set WAFDIR /Users/mark/src/cpp/waf/waflib
 	#source ~/.config/fish/conda.fish
-	
+
 end
