@@ -11,7 +11,7 @@ if status --is-interactive
 	set BROWSER open
 	set WAFDIR /Users/mark/src/cpp/waf/waflib
 
-    if set -v INSIDE_EMACS
+    if set -q INSIDE_EMACS
     else
     
         switch $TERM_PROGRAM
