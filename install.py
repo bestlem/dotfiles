@@ -90,7 +90,7 @@ def home_dotfiles(user_root):
 			for d in dirnames:
 				if d.endswith('.symlink'):
 					paths_to_link.append(root_path / d)
-				else:
+				elif not d == '.~': #Emacs backup
 					dirs_to_pass_down.append(d)
 					# modify directories to recurse into
 			dirnames[:] = dirs_to_pass_down
