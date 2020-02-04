@@ -79,7 +79,7 @@ if begin; status --is-interactive; and not functions -q -- iterm2_status; and [ 
   end
 
   # If hostname -f is slow for you, set iterm2_hostname before sourcing this script
-  if not set -q iterm2_hostname
+  if not set -q -g iterm2_hostname
     set -g iterm2_hostname (hostname -f 2>/dev/null)
     # some flavors of BSD (i.e. NetBSD and OpenBSD) don't have the -f option
     if test $status -ne 0
