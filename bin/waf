@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# run a waf command - on path so can use from emacs
-
-export WAFDIR=/Users/mark/src/cpp/waf/waflib
-python2 /Users/mark/src/cpp/waf/waf-light "$@"
-
