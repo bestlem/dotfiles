@@ -44,3 +44,19 @@ historyawk(){ history|awk '{a[$2]++}END{for(i in a){printf"%5d\t%s\n",a[i],i}}'|
 
 export PATH=~/bin:/usr/local/bin:/opt/local/bin:$PATH
 
+#well they put it in ~/.bash_profile
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/mark/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/mark/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/mark/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/mark/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
