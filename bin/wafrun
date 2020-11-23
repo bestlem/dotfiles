@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# Command to run waf
+export WAFDIR=/Users/mark/src/cpp/waf/waflib
+python3 /Users/mark/src/cpp/waf/waf "$@"

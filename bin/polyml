@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+# run poly with a file passed in
+
+/opt/local/bin/poly --use $@

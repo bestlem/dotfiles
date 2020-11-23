@@ -1,4 +1,5 @@
 package cd
 package local-config
+package sudope
 theme bobthefish
 theme default

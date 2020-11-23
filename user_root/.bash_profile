@@ -20,5 +20,7 @@ if [ -n "${PS1:-}" ]; then
     source $DIR/.bash_aliases
 fi
 
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
+if test -e "${HOME}/.iterm2_shell_integration.bash"; then
+    set +u
+    source "${HOME}/.iterm2_shell_integration.bash"
+fi
