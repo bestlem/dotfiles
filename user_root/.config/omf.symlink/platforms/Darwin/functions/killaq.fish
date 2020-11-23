@@ -1,4 +1,3 @@
-function killaq
-    # Aquamacs to interupt elisp
+function killaq --description="Aquamacs to interupt elisp"
     killall -USR2 Aquamacs
 end

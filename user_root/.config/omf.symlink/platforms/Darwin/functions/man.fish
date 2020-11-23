@@ -1,3 +1,3 @@
-function man
-       openman $argv
+function man --description="Use graphic man command"
+    openman $argv
 end
