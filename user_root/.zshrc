@@ -27,3 +27,7 @@ setopt PUSHD_IGNORE_DUPS
 setopt NO_CLOBBER
 setopt APPEND_CREATE
 setopt INTERACTIVE_COMMENTS
+
+#probably should do a more generic one using zkbd
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
